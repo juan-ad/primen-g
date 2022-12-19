@@ -1,0 +1,20 @@
+<p-tree [value]="files"  [selectionMode]="'single'" [filter]=true 
+    [(selection)]="selectedNode" (onNodeSelect)="nodeSelect($event)" 
+    scrollHeight="200px"
+    [virtualScroll]=false
+    [virtualNodeHeight]="'33'"
+    (onNodeExpand)="loadNode($event)"
+    [emptyMessage]="'No hay registros'"
+    [filterPlaceholder]="'Buscar'"
+>
+</p-tree>
+
+<div *ngIf="'hello'; then div1 else div2"></div>
+
+<ng-template #div1>
+    <p>div 1</p>
+</ng-template>
+
+<ng-template #div2>
+    <p>div 1</p>
+</ng-template>
