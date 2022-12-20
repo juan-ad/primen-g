@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { TreeModule } from 'primeng/tree';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TreeModule } from 'primeng/tree';
     AppRoutingModule,
     PanelMenuModule,
     TreeModule,
-    HttpClientModule
+    HttpClientModule,
+    ContextMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

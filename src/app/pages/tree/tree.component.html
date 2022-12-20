@@ -6,8 +6,11 @@
     (onNodeExpand)="loadNode($event)"
     [emptyMessage]="'No hay registros'"
     [filterPlaceholder]="'Buscar'"
+    [contextMenu]="cm"
 >
 </p-tree>
+
+<p-contextMenu #cm [model]="items"></p-contextMenu>
 
 <div *ngIf="'hello'; then div1 else div2"></div>
 
