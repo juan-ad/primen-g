@@ -16,7 +16,6 @@ export class TreeComponent implements OnInit {
   files!:TreeNode[];
 
   selectedNode!: TreeNode;
-
   items!: MenuItem[];
 
   constructor(private nodeService: NodeService) { }
@@ -102,8 +101,16 @@ export class TreeComponent implements OnInit {
       this.selectedNode.parent?.children?.splice(index!,1);
     }
   }
-  
+
   lalert(){
     console.log("Aqui");
+  }
+
+  viewFile(file: any) {
+    alert(file);
+  }
+
+  unselectFile() {
+    this.selectedNode = {};
   }
 }

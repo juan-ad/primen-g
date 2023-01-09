@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { TreeModule } from 'primeng/tree';
 import { SplitButtonModule } from 'primeng/splitbutton';
-import { ContextMenuModule } from 'primeng/contextmenu';
 import { DataViewModule } from 'primeng/dataview';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
@@ -20,6 +19,7 @@ import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TrashComponent } from './pages/trash/trash.component';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,9 @@ import { TrashComponent } from './pages/trash/trash.component';
     TooltipModule,
     FormsModule, 
     CheckboxModule,
-    TableModule
+    TableModule,
+    ContextMenuModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
