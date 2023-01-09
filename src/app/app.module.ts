@@ -5,17 +5,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PanelMenuComponent } from './pages/panel-menu/panel-menu.component';
+import { DataViewComponent } from './pages/data-view/data-view.component';
 import { TreeComponent } from './pages/tree/tree.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { TreeModule } from 'primeng/tree';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DataViewModule } from 'primeng/dataview';
+import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TrashComponent } from './pages/trash/trash.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PanelMenuComponent,
-    TreeComponent
+    TreeComponent,
+    DataViewComponent,
+    TrashComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +35,15 @@ import { TreeModule } from 'primeng/tree';
     AppRoutingModule,
     PanelMenuModule,
     TreeModule,
-    HttpClientModule
+    HttpClientModule,
+    SplitButtonModule,
+    ContextMenuModule,
+    DataViewModule,
+    DropdownModule,
+    TooltipModule,
+    FormsModule, 
+    CheckboxModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

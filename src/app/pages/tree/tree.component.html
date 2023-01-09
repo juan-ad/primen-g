@@ -6,10 +6,22 @@
     (onNodeExpand)="loadNode($event)"
     [emptyMessage]="'No hay registros'"
     [filterPlaceholder]="'Buscar'"
+    [contextMenu]="cm"
 >
+    <ng-template let-node pTemplate="child">
+        <label>{{node.label}}</label>
+        <!-- <a class="onDelete" (click)="delete(node)"><i class="pi pi-trash"></i></a> -->
+        <button #btn class="btn btn-danger btn-table-small ml-1 onDelete" type="button" (click)="delete()"
+          pTooltip="Eliminar">Eliminar
+          <i class="fas fa-trash"></i> 
+        </button>
+        
+    </ng-template>
+    
 </p-tree>
+<p-contextMenu #cm [model]="items"></p-contextMenu>
 
-<div *ngIf="'hello'; then div1 else div2"></div>
+<!-- <div *ngIf="'hello'; then div1 else div2"></div>
 
 <ng-template #div1>
     <p>div 1</p>
@@ -18,3 +30,5 @@
 <ng-template #div2>
     <p>div 1</p>
 </ng-template>
+
+-->

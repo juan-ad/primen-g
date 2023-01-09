@@ -1,0 +1,164 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row-justify-content">
+                <div class="row">
+                    <!-- Control View-->
+                    <span class="p-buttonset col-2" style="width: 100%;">
+                        <button pButton pRipple type="button" icon="pi pi-th-large" pTooltip="grid"
+                            tooltipPosition="bottom" (click)="onGridView(true)"></button>
+                        <button pButton pRipple icon="pi pi-list" pTooltip="list" tooltipPosition="bottom"
+                            (click)="onGridView(false)"></button>
+                    </span>
+
+                    <span class="p-buttonset col-1 offset-custom" >
+                        <button style="border-radius: 5px; width: 7%;" pButton pRipple type="button" icon="fa fa-plus" pTooltip="Vaciar"
+                            tooltipPosition="bottom" (click)="vaciarSeleccionados()">Vaciar</button>
+                        <button style="border-radius: 5px; width: 7%;" pButton pRipple type="button" icon="fa fa-plus" pTooltip="Restaurar"
+                            tooltipPosition="bottom" (click)="restaurarSeleccionados()">Restaurar</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- GridItem View -->
+        <div class="card-body">
+            <div class="row-justify-content">
+                <div class="col-12" *ngIf="gridView">
+                    <p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="name"
+                        [sortField]="sortField" [sortOrder]="sortOrder" layout="grid"
+                        [totalRecords]=2 [pageLinks]=4 [paginatorPosition]="'bottom'" 
+                        [showCurrentPageReport]="true" [currentPageReportTemplate]="' Registros Totales: {totalRecords}'"
+                        [emptyMessage]="'Sin registros'">
+                        <ng-template pTemplate="header">
+                            <div class="flex align-items-center justify-content-between">
+                                <h5 class="m-0">Papelera</h5>
+                                <span class="p-input-icon-right mb-2 md:mb-0">
+                                    <i class="pi pi-search" style="font-size: 0.7rem; padding-top: 3px;"></i>
+                                    <input type="search" pInputText placeholder="Search by Name" (input)="filtrar($event, dv)">
+                                </span>
+                            </div>
+                        </ng-template>
+                        <ng-template let-product pTemplate="gridItem">
+                            <div class="col-12 md:col-4">
+                                <div class="element-grid-item card">
+                                    <div class="element-grid-item-top">
+                                        <div>
+                                            <p-checkbox class="element-chk" name="groupname" value={{product.id}} (onChange)="onChangeChk($event)" [(ngModel)]="selectedValues"></p-checkbox>
+                                            <span class="element-name">{{product.name}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-grid-item-content">
+                                        <div class="element-category text-justify">{{product.category}}</div>
+                                        <div class="element-description text-justify">{{product.description}}</div>
+                                    </div>
+                                    <!-- Buttons -->
+                                    <div class="gap-2 d-md-flex justify-content-md-end">
+                                        <button pButton pRipple type="button" icon="pi pi-eye" pTooltip="See details"
+                                            tooltipPosition="bottom" class=" p-button-info"
+                                            style="width: 30px; height: 30px;" (click)="previsualizar(product)"></button>
+                                        <button pButton pRipple type="button" icon="fa fa-clone" pTooltip="Clone"
+                                            tooltipPosition="bottom" class="p-button-secondary"
+                                            style="width: 30px; height: 30px;" (click)="vaciar(product)"></button>
+                                        <button pButton pRipple type="button" icon="pi pi-pencil" pTooltip="Edit"
+                                            tooltipPosition="bottom" class="p-button-warning"
+                                            style="width: 30px; height: 30px;" (click)="restaurar(product)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-dataView>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="col-12 table-view" *ngIf="!gridView">
+            <div class="col-12 ">
+                <p-table #dt [value]="products" [(selection)]="selectedItems" styleClass="p-datatable-customers" responsiveLayout="scroll"
+                [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [paginator]="true" 
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0" 
+                [globalFilterFields]="['name', 'category','description']">
+
+                    <ng-template pTemplate="caption">
+                        <div class="flex align-items-center justify-content-between">
+                            <h5 class="m-0">Papelera</h5>
+                            <span class="p-input-icon-right">
+                                <i class="pi pi-search"></i>
+                                <input
+                                  pInputText
+                                  type="text"
+                                  (input)="filtroTabla($event, dt)"
+                                  placeholder="Global Search"
+                                />
+                            </span>
+                        </div>
+                    </ng-template>
+                   
+                    <ng-template pTemplate="header">
+                        <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                          <th pSortableColumn="name" style="min-width: 200px; max-width: 200px;">
+                            Name <p-sortIcon field="name"></p-sortIcon>
+                          </th>
+                          <th pSortableColumn="category" style="min-width: 200px; max-width: 200px;">
+                            Country <p-sortIcon field="category"></p-sortIcon>
+                          </th>
+                          <th pSortableColumn="description" style="min-width: 200px; max-width: 200px;">
+                            Representative <p-sortIcon field="description"></p-sortIcon>
+                          </th>
+                          <th class="text-center">
+                            Options
+                          </th>
+                        </tr>
+                        <tr>
+                          
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-product>
+                        <tr class="p-selectable-row">
+                            <td style="width: 3rem">
+                                <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                            </td>
+                            <td style="min-width: 200px; max-width: 200px;">
+                                <span class="p-column-title">Name</span>
+                                {{ product.name }}
+                            </td>
+                            <td style="min-width: 200px; max-width: 200px;">
+                                {{ product.category }}
+                            </td>
+                            <td style="min-width: 200px; max-width: 200px;">
+                                {{ product.description }}
+                            </td>
+                            <td style="text-align: center">
+                                <button pButton pRipple type="button" icon="pi pi-eye" pTooltip="See details"
+                                    tooltipPosition="bottom" class=" p-button-info"
+                                    style="width: 30px; height: 30px;" (click)="previsualizar(product)"></button>
+                            
+                                <button pButton pRipple type="button" icon="fa fa-clone" pTooltip="Clone"
+                                    tooltipPosition="bottom" class="p-button-secondary"
+                                    style="width: 30px; height: 30px;" (click)="vaciar(product)"></button>
+                        
+                                <button pButton pRipple type="button" icon="pi pi-pencil" pTooltip="Edit"
+                                    tooltipPosition="bottom" class="p-button-warning"
+                                    style="width: 30px; height: 30px;" (click)="restaurar(product)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                          <td colspan="8">No customers found.</td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+                
+            </div>
+        </div>
+
+    </div>
+</div>

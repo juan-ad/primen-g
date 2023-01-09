@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TreeNode } from 'primeng/api';
+import { MenuItem, TreeNode } from 'primeng/api';
 import { NodeService } from 'src/app/shared/services/node.service';
 import {TreeDragDropService} from 'primeng/api';
 
@@ -16,6 +16,8 @@ export class TreeComponent implements OnInit {
   files!:TreeNode[];
 
   selectedNode!: TreeNode;
+
+  items!: MenuItem[];
 
   constructor(private nodeService: NodeService) { }
 
@@ -74,6 +76,11 @@ export class TreeComponent implements OnInit {
     this.nodeService.getFiles().subscribe( response => {
       this.files = response;
     });
+
+    this.items = [
+      {label: 'View', icon: 'pi pi-search', command: (event) => this.lalert()},
+      {label: 'Unselect', icon: 'pi pi-times', command: (event) => this.lalert()}
+    ];
   }
 
   nodeSelect(event:any){
@@ -81,11 +88,22 @@ export class TreeComponent implements OnInit {
   }
 
   loadNode(event:any){
-    if (event.node){
+    /*if (event.node){
       console.log("Nodo Expandido", event.node);
       this.nodeService.getLazyFiles().subscribe( nodes => {
         event.node.children = nodes;
       });
+    }*/
+  }
+
+  delete(){
+    if (this.selectedNode){
+      let index = this.selectedNode.parent?.children?.indexOf(this.selectedNode);
+      this.selectedNode.parent?.children?.splice(index!,1);
     }
+  }
+  
+  lalert(){
+    console.log("Aqui");
   }
 }
