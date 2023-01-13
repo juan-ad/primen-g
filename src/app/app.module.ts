@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TrashComponent } from './pages/trash/trash.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { TableComponent } from './pages/table/table.component';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
     PanelMenuComponent,
     TreeComponent,
     DataViewComponent,
-    TrashComponent
+    TrashComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +47,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
     FormsModule, 
     CheckboxModule,
     TableModule,
-    ContextMenuModule
-
+    ContextMenuModule,
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

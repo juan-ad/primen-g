@@ -1,0 +1,96 @@
+<div class="container">
+    <!-- Table View -->
+    <div class="col-12" >
+        <p-table #dt [value]="items" [(selection)]="selectedItems" styleClass="p-datatable-customers" responsiveLayout="scroll"
+            [rowHover]="true" [rows]="10" [showCurrentPageReport]="true" [paginator]="true" 
+            currentPageReportTemplate="{first} to {last} of {totalRecords} entries" [filterDelay]="0" 
+            [globalFilterFields]="['name', 'category','description']">
+
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between" style="width: 100%;">
+                    <p-toolbar style="width:100%;">
+                        <ng-template pTemplate="left">
+                            <span class="p-input-icon-right">
+                                <i class="pi pi-search"></i>
+                                <input
+                                    pInputText
+                                    type="text"
+                                    (input)="filtroTabla($event, dt)"
+                                    placeholder="Buscar ..."
+                                />
+                            </span>
+                        </ng-template>
+                        <ng-template pTemplate="right">
+                            <button pButton pRipple type="button" pTooltip=""
+                                tooltipPosition="bottom" class="p-button-success mr-2" label="Restaurar Seleccionados"
+                                style="width: 218px; height: 30px;" (click)="restaurarSeleccionados()"></button>
+                            <button pButton pRipple type="button" pTooltip=""
+                                tooltipPosition="bottom" class="p-button-danger" label="Vaciar Seleccionados"
+                                style="width: 218px; height: 30px;" (click)="vaciarSeleccionados()"></button>
+                        </ng-template>
+                    </p-toolbar>
+                </div>
+            </ng-template>
+            
+            <ng-template pTemplate="header">
+                <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                    <th pSortableColumn="name" style="min-width: 200px; max-width: 200px;">
+                    Name <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="category" style="min-width: 200px; max-width: 200px;">
+                    Country <p-sortIcon field="category"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="description" style="min-width: 200px; max-width: 200px;">
+                    Representative <p-sortIcon field="description"></p-sortIcon>
+                    </th>
+                    <th class="text-center">
+                    Options
+                    </th>
+                </tr>
+                <tr>
+                    
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-product>
+                <tr class="p-selectable-row">
+                    <td style="width: 3rem">
+                        <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                    </td>
+                    <td style="min-width: 200px; max-width: 200px;">
+                        <span class="p-column-title">Name</span>
+                        {{ product.name }}
+                    </td>
+                    <td style="min-width: 200px; max-width: 200px;">
+                        {{ product.category }}
+                    </td>
+                    <td style="min-width: 200px; max-width: 200px;">
+                        {{ product.description }}
+                    </td>
+                    <td style="text-align: center">
+                        <button pButton pRipple type="button" icon="pi pi-eye" pTooltip="Previsualizar"
+                            tooltipPosition="bottom" class="p-button-info mr-2"
+                            style="width: 30px; height: 30px;" (click)="previsualizar(product)"></button>
+                    
+                        <button pButton pRipple type="button" icon="pi pi-trash" pTooltip="Eliminar Permanentemente"
+                            tooltipPosition="bottom" class="p-button-danger mr-2"
+                            style="width: 30px; height: 30px;" (click)="eliminarPermanentemente(product)"></button>
+                
+                        <button pButton pRipple type="button" icon="pi pi-file" pTooltip="Restaurar"
+                            tooltipPosition="bottom" class="p-button-success"
+                            style="width: 30px; height: 30px;" (click)="restaurar(product)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+                
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8">No customers found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DataViewComponent } from './pages/data-view/data-view.component';
 import { PanelMenuComponent } from './pages/panel-menu/panel-menu.component';
+import { TableComponent } from './pages/table/table.component';
 import { TrashComponent } from './pages/trash/trash.component';
 import { TreeComponent } from './pages/tree/tree.component';
 
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: "trash", component: TrashComponent
+  },
+  {
+    path: "table", component: TableComponent
   }
 ];
 
