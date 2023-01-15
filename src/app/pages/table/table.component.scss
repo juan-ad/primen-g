@@ -5,6 +5,14 @@
         border: none;
     }
 
+    .p-toolbar-group-left{
+        width: 30%;
+    }
+
+    .p-input-icon-right{
+        width: 100%;
+    }
+
     .p-paginator {
         .p-paginator-current {
             margin-left: auto;
@@ -101,4 +109,15 @@
         }
     }
 
+}
+
+.input-text{
+    padding: 3px 5px;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+}
+
+.icon-search{
+    font-size: 0.8rem;
 }
